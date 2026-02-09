@@ -3,42 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="TDK uyumlu yazım kuralları oyunu. Kaldığın yerden devam et!">
-  <title>Kuralsız Yazım - Yerel Kayıt</title>
+  <title>Kuralsız Yazım - Final Fix</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* CORE */
     body { font-family: 'Nunito', sans-serif; overflow: hidden; user-select: none; }
-    
-    /* ANIMATIONS */
     @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     @keyframes popIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
     
-    /* UI COMPONENTS */
     .glass-panel { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.2); }
     .bg-paper .glass-panel { background: rgba(255, 251, 235, 0.95); border-color: #b45309; box-shadow: 0 10px 30px rgba(69, 26, 3, 0.1); }
     
-    .btn-option { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); position: relative; cursor: pointer; }
-    @media (hover: hover) { .btn-option:hover { transform: scale(1.02); background: rgba(255,255,255,0.2); } }
+    .btn-option { transition: all 0.1s; position: relative; cursor: pointer; }
     .btn-option:active { transform: scale(0.96); }
     
-    /* STATES */
-    .state-correct { background: #10b981 !important; color: white !important; border-color: transparent !important; }
-    .state-wrong { background: #ef4444 !important; color: white !important; border-color: transparent !important; opacity: 0.9; }
+    .state-correct { background: #10b981 !important; color: white !important; }
+    .state-wrong { background: #ef4444 !important; color: white !important; }
     .strike-through { text-decoration: line-through; text-decoration-thickness: 3px; opacity: 0.7; }
-    .icon-feedback { display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.2); margin-left: 8px; font-size: 0.8rem; }
-
-    /* THEMES */
+    
     .theme-transition { transition: background 1s ease, color 0.3s ease; }
     .bg-aurora-purple { background: linear-gradient(-45deg, #6366f1, #a855f7, #ec4899); background-size: 400% 400%; animation: gradientMove 20s infinite; color: white; }
     .bg-aurora-green { background: linear-gradient(-45deg, #10b981, #3b82f6, #06b6d4); background-size: 400% 400%; animation: gradientMove 20s infinite; color: white; }
     .bg-paper { background: #fdf6e3 url("https://www.transparenttextures.com/patterns/old-map.png"); color: #451a03; }
-    .bg-paper .glass-panel { background: rgba(255, 251, 235, 0.98); border-color: #b45309; }
-    .question-card { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
-    
-    .key-hint { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.7rem; opacity: 0.4; font-weight: bold; border: 1px solid currentColor; padding: 2px 6px; rounded: 4px; }
   </style>
 </head>
 <body id="app-body" class="h-full w-full bg-aurora-purple theme-transition">
@@ -51,97 +38,98 @@
   </div>
 
   <div id="app" class="h-full flex flex-col relative max-w-4xl mx-auto">
-    
     <div id="overlay-level" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-xl hidden">
-      <h2 id="overlay-title" class="text-5xl md:text-6xl font-black text-white mb-2 animate-[popIn_0.5s_ease]">AŞAMA 1</h2>
+      <h2 id="overlay-title" class="text-5xl font-black text-white mb-2 animate-[popIn_0.5s_ease]">AŞAMA 1</h2>
       <p id="overlay-sub" class="text-indigo-400 font-bold tracking-widest uppercase">Hazırlan...</p>
     </div>
 
     <section id="view-landing" class="absolute inset-0 z-40 flex flex-col items-center justify-center p-6 bg-black/60 backdrop-blur-lg">
       <header class="w-full flex justify-between items-center absolute top-6 px-6">
         <div class="flex gap-2">
-           <div class="bg-white/10 px-3 py-1 rounded-lg text-white text-xs font-bold border border-white/20 flex items-center gap-1 cursor-default">
-             💎 <span id="stat-score">0</span>
-           </div>
-           <div class="bg-white/10 px-3 py-1 rounded-lg text-white text-xs font-bold border border-white/20 flex items-center gap-1 cursor-default">
-             🔥 <span id="stat-streak">0</span>
-           </div>
+           <div class="bg-white/10 px-3 py-1 rounded-lg text-white text-xs font-bold border border-white/20">💎 <span id="stat-score">0</span></div>
+           <div class="bg-white/10 px-3 py-1 rounded-lg text-white text-xs font-bold border border-white/20">🔥 <span id="stat-streak">0</span></div>
         </div>
-        <button onclick="window.App.UI.toggleShop(true)" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-full font-bold shadow-lg text-sm hover:scale-105 transition-transform cursor-pointer">🛒 Dükkan</button>
+        <button onclick="window.App.UI.toggleShop(true)" class="bg-indigo-600 text-white px-4 py-2 rounded-full font-bold shadow-lg text-sm">🛒 Dükkan</button>
       </header>
 
       <div class="text-center mb-10">
-        <h1 class="text-6xl md:text-8xl font-black text-white mb-2 tracking-tighter italic drop-shadow-2xl cursor-default text-center">KURALSIZ</h1>
-        <p class="text-white/70 mb-10 font-semibold text-lg cursor-default text-center">Doğruyu bul, yanlışı çiz. ✍️</p>
+        <h1 class="text-6xl font-black text-white mb-2 italic">KURALSIZ</h1>
+        <p class="text-white/70 font-semibold">Doğruyu bul, yanlışı çiz. ✍️</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-lg">
-        <button onclick="window.App.Engine.start('normal')" class="glass-panel p-8 rounded-3xl text-left hover:bg-white/20 transition-all group text-white cursor-pointer hover:scale-105 relative">
+        <button onclick="window.App.Engine.start('normal')" class="glass-panel p-8 rounded-3xl text-left hover:bg-white/20 transition-all text-white relative">
           <span class="text-4xl mb-3 block">🧘‍♂️</span>
           <h3 id="btn-journey-title" class="text-2xl font-bold">Yolculuk</h3>
           <p id="btn-journey-desc" class="text-sm opacity-70 mt-1">Kaldığın yerden devam et</p>
           <div id="journey-progress" class="absolute bottom-0 left-0 h-1 bg-green-500 transition-all" style="width: 0%"></div>
         </button>
-        <button onclick="window.App.Engine.start('timer')" class="glass-panel p-8 rounded-3xl text-left hover:bg-white/20 transition-all group text-white relative overflow-hidden cursor-pointer hover:scale-105">
+        <button onclick="window.App.Engine.start('timer')" class="glass-panel p-8 rounded-3xl text-left hover:bg-white/20 transition-all text-white relative overflow-hidden">
           <div class="absolute top-0 right-0 bg-yellow-500 text-black text-[10px] font-bold px-2 py-1 rounded-bl-lg">POPÜLER</div>
           <span class="text-4xl mb-3 block">⚡</span>
           <h3 class="text-2xl font-bold">Yıldırım</h3>
           <p class="text-sm opacity-70 mt-1">30 Saniye • Seri Bonusu</p>
         </button>
       </div>
-      
-      <button onclick="window.App.Engine.resetProgress()" class="absolute bottom-6 text-white/20 text-xs font-mono hover:text-white/50 underline cursor-pointer">
-        İlerlememi Sıfırla
-      </button>
+      <button onclick="window.App.Engine.resetProgress()" class="absolute bottom-6 text-white/20 text-xs underline">İlerlememi Sıfırla</button>
     </section>
 
     <header id="view-header" class="relative z-10 px-6 pt-10 pb-4 flex items-center justify-between hidden">
       <div class="flex items-center gap-3">
-        <button onclick="window.App.Engine.quit()" class="bg-red-500/20 text-red-100 px-3 py-1 rounded-full text-xs font-bold hover:bg-red-500 transition-colors cursor-pointer">ÇIK</button>
-        <div class="flex flex-col cursor-default">
-          <span id="hud-mode" class="text-[10px] font-bold uppercase tracking-widest opacity-70">AŞAMA 1</span>
-          <div id="hud-lives" class="flex gap-1 text-red-400 text-sm h-4"></div>
-        </div>
+        <button onclick="window.App.Engine.quit()" class="bg-red-500/20 text-red-100 px-3 py-1 rounded-full text-xs font-bold">ÇIK</button>
+        <div class="flex flex-col"><span id="hud-mode" class="text-[10px] font-bold uppercase text-white/70">AŞAMA 1</span><div id="hud-lives" class="text-xs"></div></div>
       </div>
-      <div class="flex gap-3 items-center cursor-default">
+      <div class="flex gap-3 items-center">
         <div id="hud-timer" class="hidden bg-red-600 text-white px-3 py-1 rounded-lg font-mono font-bold shadow-lg text-sm">30s</div>
-        <div class="glass-panel px-4 py-1 rounded-lg font-black border border-white/20 text-lg"><span id="hud-score">0</span></div>
+        <div class="glass-panel px-4 py-1 rounded-lg font-black border border-white/20 text-lg text-white"><span id="hud-score">0</span></div>
       </div>
     </header>
 
     <main id="view-game" class="relative z-10 flex-1 px-4 flex flex-col justify-center max-w-2xl mx-auto w-full hidden">
       <div class="glass-panel rounded-[2.5rem] p-8 shadow-2xl relative">
-        <div id="feedback-bar" class="absolute -top-5 left-1/2 -translate-x-1/2 bg-white text-indigo-900 px-6 py-2 rounded-full font-black shadow-lg scale-0 transition-transform whitespace-nowrap z-20 text-sm pointer-events-none">HARİKA!</div>
-        <p id="question-text" class="text-2xl md:text-4xl font-black text-center leading-tight min-h-[5rem] flex items-center justify-center cursor-default">Yükleniyor...</p>
+        <div id="feedback-bar" class="absolute -top-5 left-1/2 -translate-x-1/2 bg-white text-indigo-900 px-6 py-2 rounded-full font-black shadow-lg scale-0 transition-transform whitespace-nowrap z-20 text-sm">HARİKA!</div>
+        <p id="question-text" class="text-2xl md:text-3xl font-black text-center leading-tight min-h-[5rem] flex items-center justify-center text-gray-800 dark:text-white">Yükleniyor...</p>
         <div id="options-grid" class="grid grid-cols-1 gap-3 mt-4"></div>
-        <button id="btn-next" onclick="window.App.Engine.next()" class="w-full py-4 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-xl shadow-lg hidden transition-all hover:scale-[1.02] cursor-pointer">DEVAM ET (Space)</button>
+        <button id="btn-next" onclick="window.App.Engine.next()" class="w-full py-4 mt-6 bg-indigo-600 text-white font-black rounded-xl shadow-lg hidden">DEVAM ET (Space)</button>
       </div>
     </main>
 
     <section id="view-summary" class="absolute inset-0 z-50 flex flex-col items-center justify-center p-6 bg-black/95 backdrop-blur-xl text-center hidden text-white">
-      <div class="text-6xl mb-4 animate-[float_3s_infinite]">🏆</div>
-      <h2 id="sum-title" class="text-4xl font-black mb-2">Harika İş!</h2>
-      <div class="flex gap-4 mb-8 w-full max-w-sm justify-center">
-        <div class="bg-white/10 p-4 rounded-2xl border border-white/10 min-w-[120px]"><div class="text-[10px] uppercase opacity-50">Puan</div><div id="sum-score" class="text-3xl font-black">0</div></div>
-        <div class="bg-white/10 p-4 rounded-2xl border border-white/10 min-w-[120px]"><div class="text-[10px] uppercase opacity-50">Hatalar</div><div id="sum-mistakes" class="text-3xl font-black text-red-400">0</div></div>
+      <div class="text-6xl mb-4">🏆</div>
+      <h2 id="sum-title" class="text-4xl font-black mb-2">Bitti!</h2>
+      <div class="flex gap-4 mb-8 justify-center">
+        <div class="bg-white/10 p-4 rounded-2xl"><div class="text-[10px] uppercase opacity-50">Puan</div><div id="sum-score" class="text-3xl font-black">0</div></div>
+        <div class="bg-white/10 p-4 rounded-2xl"><div class="text-[10px] uppercase opacity-50">Hatalar</div><div id="sum-mistakes" class="text-3xl font-black text-red-400">0</div></div>
       </div>
-      <button onclick="location.reload()" class="w-full max-w-xs py-4 bg-white text-indigo-900 font-black rounded-xl hover:scale-105 transition-transform cursor-pointer shadow-xl">ANA MENÜYE DÖN</button>
+      <button onclick="location.reload()" class="w-full max-w-xs py-4 bg-white text-indigo-900 font-black rounded-xl">ANA MENÜYE DÖN</button>
     </section>
 
-    <div id="modal-shop" class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-md flex items-end sm:items-center justify-center p-4 hidden">
+    <div id="modal-shop" class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 hidden">
       <div class="bg-[#1e1b4b] w-full max-w-md rounded-3xl border border-white/10 p-6 max-h-[85vh] overflow-y-auto">
-        <div class="flex justify-between items-center mb-6"><h2 class="text-2xl font-black text-white">Market</h2><button onclick="window.App.UI.toggleShop(false)" class="text-white/50 hover:text-white text-2xl p-2 cursor-pointer">✕</button></div>
-        <h3 class="text-xs font-bold text-indigo-300 uppercase mb-3">Güçlendirmeler</h3><div id="shop-buffs" class="space-y-3 mb-6"></div>
-        <h3 class="text-xs font-bold text-indigo-300 uppercase mb-3">Temalar</h3><div id="shop-themes" class="grid grid-cols-2 gap-3"></div>
+        <div class="flex justify-between items-center mb-6"><h2 class="text-2xl font-black text-white">Market</h2><button onclick="window.App.UI.toggleShop(false)" class="text-white/50 text-2xl">✕</button></div>
+        <div id="shop-buffs" class="space-y-3 mb-6"></div>
+        <div id="shop-themes" class="grid grid-cols-2 gap-3"></div>
       </div>
     </div>
   </div>
 
   <script>
-    /** --- MODULE: DATA --- */
+    // --- KARIŞTIRMA FONKSİYONU ---
+    function shuffleArray(array) {
+        let currentIndex = array.length, randomIndex;
+        const newArray = [...array];
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [newArray[currentIndex], newArray[randomIndex]] = [newArray[randomIndex], newArray[currentIndex]];
+        }
+        return newArray;
+    }
+
+    /** --- MODULE: DATA (Düzeltilmiş Veri Yapısı) --- */
     const Data = {
       words: {
-      easy: [
+        easy: [
             {id:1, correct:'yalnız', wrong:'yanlız'}, {id:2, correct:'yanlış', wrong:'yalnış'}, {id:3, correct:'herkes', wrong:'herkez'},
             {id:4, correct:'sürpriz', wrong:'süpriz'}, {id:5, correct:'tıraş', wrong:'traş'}, {id:6, correct:'makine', wrong:'makina'},
             {id:7, correct:'meyve', wrong:'meyva'}, {id:8, correct:'grup', wrong:'gurup'}, {id:9, correct:'direkt', wrong:'direk'},
@@ -211,17 +199,16 @@
             {id:407, correct:'müessese', wrong:'müessse'}, {id:408, correct:'tezahür', wrong:'tezahürh'}, {id:409, correct:'nihai', wrong:'nihâi'},
             {id:410, correct:'tedbir', wrong:'tedbirr'}, {id:411, correct:'kıymetli', wrong:'kıymedli'}
         ]
-
       },
       shop: {
         themes: [
-          {id:'bg-aurora-purple', name:'Klasik Mor', cost:0, desc:'Varsayılan'},
-          {id:'bg-aurora-green', name:'Doğa Yeşili', cost:500, desc:'Ferahlatıcı'},
-          {id:'bg-paper', name:'Antik Kağıt', cost:2000, desc:'Akademik His'}
+          {id:'bg-aurora-purple', name:'Klasik Mor', cost:0},
+          {id:'bg-aurora-green', name:'Doğa Yeşili', cost:500},
+          {id:'bg-paper', name:'Antik Kağıt', cost:2000}
         ],
         buffs: [
-          {id:'life', name:'❤️ +1 Can (Boss)', cost: 100, desc:'Boss toleransı.'},
-          {id:'time', name:'⏱️ +10sn (Timer)', cost: 150, desc:'Ekstra süre.'}
+          {id:'life', name:'❤️ +1 Can', cost: 100},
+          {id:'time', name:'⏱️ +10sn', cost: 150}
         ]
       }
     };
@@ -230,16 +217,13 @@
 
     /** --- STATE LAYER --- */
     const State = {
-      // Varsayılan değerler
       data: { totalScore: 0, maxStreak: 0, equippedTheme: 'bg-aurora-purple', failedWords: {}, inventory: { life: 0, time: 0 }, unlocks: ['bg-aurora-purple'], currentStage: 0 },
-      load() { const s=localStorage.getItem('ky_save_v10'); if(s) this.data={...this.data,...JSON.parse(s)}; },
-      save() { localStorage.setItem('ky_save_v10', JSON.stringify(this.data)); },
+      load() { const s=localStorage.getItem('ky_save_v12'); if(s) this.data={...this.data,...JSON.parse(s)}; },
+      save() { localStorage.setItem('ky_save_v12', JSON.stringify(this.data)); },
       addMistake(id) { this.data.failedWords[id]=(this.data.failedWords[id]||0)+1; this.save(); },
       resetProgress() {
-          if(confirm("Tüm oyun ilerlemen sıfırlansın mı?")) {
-              this.data.currentStage = 0;
-              this.save();
-              location.reload();
+          if(confirm("İlerleme sıfırlansın mı?")) {
+              this.data.currentStage = 0; this.save(); location.reload();
           }
       }
     };
@@ -247,31 +231,22 @@
     /** --- UI LAYER --- */
     const UI = {
       $: (id) => document.getElementById(id),
-      init() { 
-          State.load(); 
-          this.applyTheme(State.data.equippedTheme); 
-          this.updateStats();
-          this.updateJourneyButton();
-      },
+      init() { State.load(); this.applyTheme(State.data.equippedTheme); this.updateStats(); this.updateJourney(); },
       showScreen(id) { ['view-landing','view-header','view-game','view-summary'].forEach(s=>this.$(s).classList.add('hidden')); this.$(id).classList.remove('hidden'); },
       applyTheme(t) { document.body.className=document.body.className.replace(/bg-[\w-]+/g, t); document.body.style.color=t.includes('paper')?'#451a03':'white'; },
       updateStats() { this.$('stat-score').textContent=State.data.totalScore; this.$('stat-streak').textContent=State.data.maxStreak; },
       
-      // Dinamik "Yolculuk" Butonu
-      updateJourneyButton() {
-          const stage = State.data.currentStage;
-          const stages = ["Kolay", "Orta", "Zor", "Bitti"];
-          const label = stage < 3 ? stages[stage] : "Bitti";
-          
-          if(stage > 0 && stage < 3) {
-              this.$('btn-journey-title').textContent = "Devam Et";
-              this.$('btn-journey-desc').textContent = `${label} Aşamadan Başla`;
-              // İlerleme çubuğu
-              this.$('journey-progress').style.width = ((stage / 3) * 100) + "%";
-          } else if (stage >= 3) {
-              this.$('btn-journey-title').textContent = "Tamamlandı!";
-              this.$('btn-journey-desc').textContent = "Tüm aşamalar bitti.";
-              this.$('journey-progress').style.width = "100%";
+      updateJourney() {
+          const st = State.data.currentStage;
+          const label = st < 3 ? ["Kolay","Orta","Zor"][st] : "Bitti";
+          if(st>0 && st<3) {
+              this.$('btn-journey-title').textContent="Devam Et";
+              this.$('btn-journey-desc').textContent=`${label} Aşamadan Başla`;
+              this.$('journey-progress').style.width=((st/3)*100)+"%";
+          } else if(st>=3) {
+              this.$('btn-journey-title').textContent="Tamamlandı!";
+              this.$('btn-journey-desc').textContent="Tebrikler!";
+              this.$('journey-progress').style.width="100%";
           }
       },
 
@@ -282,7 +257,7 @@
       },
       toggleShop(s) { const m=this.$('modal-shop'); if(s){this.renderShop(); m.classList.remove('hidden');}else m.classList.add('hidden'); },
       renderShop() {
-        this.$('shop-buffs').innerHTML=Data.shop.buffs.map(b=>`<div class="flex justify-between items-center p-3 bg-white/5 rounded-2xl border border-white/10"><div class="text-white"><div class="font-bold text-sm">${b.name}</div><div class="text-xs text-yellow-400">Stok: ${State.data.inventory[b.id]||0}</div></div><button onclick="window.App.Engine.buyItem('buff','${b.id}',${b.cost})" class="bg-indigo-600 hover:bg-indigo-500 px-3 py-2 rounded-lg text-white text-xs font-bold">${b.cost} 💎 AL</button></div>`).join('');
+        this.$('shop-buffs').innerHTML=Data.shop.buffs.map(b=>`<div class="flex justify-between items-center p-3 bg-white/5 rounded-2xl border border-white/10"><div class="text-white"><div class="font-bold text-sm">${b.name}</div><div class="text-xs text-yellow-400">Stok: ${State.data.inventory[b.id]||0}</div></div><button onclick="window.App.Engine.buyItem('buff','${b.id}',${b.cost})" class="bg-indigo-600 hover:bg-indigo-500 px-3 py-2 rounded-lg text-white text-xs font-bold">${b.cost} 💎</button></div>`).join('');
         this.$('shop-themes').innerHTML=Data.shop.themes.map(t=>{
             const own=State.data.unlocks.includes(t.id), eq=State.data.equippedTheme===t.id;
             return `<div class="p-3 bg-white/5 rounded-2xl border ${eq?'border-green-500':'border-white/10'} text-center text-white"><div class="h-10 w-full mb-2 rounded-lg ${t.id} border border-white/20"></div><p class="font-bold text-xs mb-1">${t.name}</p><button onclick="window.App.Engine.buyItem('theme','${t.id}',${t.cost})" class="w-full py-1.5 ${eq?'bg-green-500':(own?'bg-indigo-600':'bg-gray-700')} rounded-lg font-bold text-[10px] uppercase">${eq?'AKTİF':(own?'SEÇ':`${t.cost} 💎`)}</button></div>`;
@@ -291,7 +266,7 @@
       renderHearts(c) { this.$('hud-lives').innerHTML='❤️'.repeat(c); }
     };
 
-    /** --- ENGINE LAYER --- */
+    /** --- ENGINE LAYER (Updated for correct/wrong) --- */
     const Engine = {
       state: { mode:null, subStage:'normal', score:0, streak:0, lives:3, timer:30, interval:null, pool:[], failed:[], currentQ:0, ended:false, usedWordIds:new Set() },
       sounds: { correct: document.getElementById('sfx-correct'), wrong: document.getElementById('sfx-wrong'), level: document.getElementById('sfx-level'), fail: document.getElementById('sfx-fail') },
@@ -316,11 +291,10 @@
         
         if(mode==='timer') {
             const extra=State.data.inventory.time>0?10:0; if(extra>0){State.data.inventory.time--; State.save(); UI.showFeedback("⏱️ Boost Aktif!", "good");}
-            this.state.pool=[...ALL_WORDS]; 
+            this.state.pool=shuffleArray([...ALL_WORDS]); 
             this.state.timer=30+extra; UI.$('hud-timer').classList.remove('hidden'); this.startTimer();
         } else {
             UI.$('hud-timer').classList.add('hidden'); 
-            // Kaldığı leveldan başla (eğer bitmediyse)
             const startLvl = State.data.currentStage >= 3 ? 0 : State.data.currentStage;
             this.initLevel(startLvl);
         }
@@ -330,7 +304,8 @@
       initLevel(lvl) {
         this.state.subStage='normal'; this.state.currentLevel=lvl; this.state.currentQ=0; this.state.failed=[]; 
         this.state.usedWordIds.clear(); 
-        this.state.pool=Data.words[['easy','medium','hard'][lvl]].sort(()=>Math.random()-0.5).slice(0,20);
+        // correct/wrong anahtarlarıyla çalışır
+        this.state.pool=shuffleArray(Data.words[['easy','medium','hard'][lvl]]).slice(0, 10);
         
         const overlay=UI.$('overlay-level'); UI.$('overlay-title').textContent=["AŞAMA 1","AŞAMA 2","AŞAMA 3"][lvl];
         this.play('level'); overlay.classList.remove('hidden');
@@ -342,7 +317,7 @@
         this.state.subStage='boss';
         const extra=State.data.inventory.life>0?1:0; if(extra>0){State.data.inventory.life--; State.save();}
         this.state.lives=3+extra; this.state.currentQ=0;
-        this.state.pool=Data.words[['easy','medium','hard'][this.state.currentLevel]].sort(()=>0.5-Math.random()).slice(0,5);
+        this.state.pool=shuffleArray(Data.words[['easy','medium','hard'][this.state.currentLevel]]).slice(0, 5);
         UI.renderHearts(this.state.lives);
         const overlay=UI.$('overlay-level'); UI.$('overlay-title').textContent="BOSS"; overlay.classList.remove('hidden');
         this.play('level');
@@ -357,29 +332,20 @@
 
       next() {
         if(this.state.mode==='timer') { this.nextQuestion(); return; }
-        
         this.state.currentQ++;
-        
         if (this.state.mode === 'normal') {
-            const limit = this.state.subStage === 'boss' ? 5 : this.state.pool.length;
+            const limit = this.state.pool.length;
             if (this.state.currentQ >= limit) {
                 if (this.state.subStage === 'normal') {
                     this.state.failed.length > 0 ? this.initReview() : this.initBoss();
                 } else if (this.state.subStage === 'review') {
                     this.initBoss();
                 } else if (this.state.subStage === 'boss') {
-                    // Boss bitti, level atla
                     if (this.state.currentLevel < 2) {
                         const nextLvl = this.state.currentLevel + 1;
-                        // İlerlemeyi kaydet
-                        State.data.currentStage = nextLvl;
-                        State.save();
-                        this.initLevel(nextLvl);
+                        State.data.currentStage = nextLvl; State.save(); this.initLevel(nextLvl);
                     } else {
-                        // Oyun bitti
-                        State.data.currentStage = 3; // 3 = Bitti
-                        State.save();
-                        this.endGame("YOLCULUK TAMAMLANDI!");
+                        State.data.currentStage = 3; State.save(); this.endGame("YOLCULUK TAMAMLANDI!");
                     }
                 }
                 return;
@@ -407,18 +373,19 @@
           ? `Hangisi <span class="text-green-500 underline decoration-4">DOĞRU</span>?` 
           : `Hangisi <span class="text-red-500 underline decoration-4">YANLIŞ</span>?`;
 
+        // Şıklar için correct/wrong kullanımı
         const all = ALL_WORDS;
         const distractors = all.filter(w => w.id !== word.id).sort(()=>0.5-Math.random()).slice(0,3);
         
         let options = [];
         if(targetCorrect) {
-            options = [{txt:word.c, isCorrect:true, meta:word}, ...distractors.map(d=>({txt:d.w, isCorrect:false, meta:d}))];
+            options = [{txt:word.correct, isCorrect:true, meta:word}, ...distractors.map(d=>({txt:d.wrong, isCorrect:false, meta:d}))];
         } else {
-            options = [{txt:word.w, isCorrect:true, meta:word}, ...distractors.map(d=>({txt:d.c, isCorrect:false, meta:d}))];
+            options = [{txt:word.wrong, isCorrect:true, meta:word}, ...distractors.map(d=>({txt:d.correct, isCorrect:false, meta:d}))];
         }
         
         const grid=UI.$('options-grid'); grid.innerHTML='';
-        options.sort(()=>0.5-Math.random()).forEach((opt,idx)=>{
+        shuffleArray(options).forEach((opt,idx)=>{
             const btn=document.createElement('button');
             btn.className="btn-option glass-panel p-4 rounded-xl text-lg font-bold text-indigo-900 dark:text-white flex justify-between items-center w-full focus-ring hover:bg-white/20";
             btn.innerHTML=`<span class="pointer-events-none">${opt.txt}</span> <span class="text-xs opacity-50 border border-current px-1 rounded hidden md:inline-block">${idx+1}</span>`;
@@ -451,8 +418,9 @@
 
         Array.from(UI.$('options-grid').children).forEach((b,i)=>{
             const opt = allOptions[i];
-            if(opt.txt === opt.meta.w) {
-                b.innerHTML = `<span class="strike-through">${opt.txt}</span> <span class="ml-2 text-green-400 font-black">→ ${opt.meta.c}</span>`;
+            // Doğruyu göster (meta.correct/wrong ile)
+            if(opt.txt === opt.meta.wrong) {
+                b.innerHTML = `<span class="strike-through">${opt.txt}</span> <span class="ml-2 text-green-400 font-black">→ ${opt.meta.correct}</span>`;
             }
         });
 
@@ -492,6 +460,3 @@
   </script>
 </body>
 </html>
-
-
-
