@@ -141,65 +141,77 @@
     /** --- MODULE: DATA --- */
     const Data = {
       words: {
-         easy: [
-        {id:1,correct:'yalnız',wrong:'yanlız'},{id:2,correct:'yanlış',wrong:'yalnış'},{id:3,correct:'herkes',wrong:'herkez'},{id:4,correct:'sürpriz',wrong:'süpriz'},
-        {id:5,correct:'tıraş',wrong:'traş'},{id:6,correct:'makine',wrong:'makina'},{id:7,correct:'meyve',wrong:'meyva'},{id:8,correct:'grup',wrong:'gurup'},
-        {id:9,correct:'direkt',wrong:'direk'},{id:10,correct:'poğaça',wrong:'pohaça'},{id:11,correct:'elektrik',wrong:'elektirik'},{id:12,correct:'fantezi',wrong:'fantazi'},
-        {id:13,correct:'fasulye',wrong:'fasulye'},{id:14,correct:'kavanoz',wrong:'gavanoz'},{id:15,correct:'materyal',wrong:'mataryel'},{id:16,correct:'espri',wrong:'espiri'},
-        {id:17,correct:'idman',wrong:'itman'},{id:18,correct:'eşofman',wrong:'eşortman'},{id:19,correct:'etüt',wrong:'etüd'},{id:20,correct:'lavabo',wrong:'lavobo'}{id:101, c:'aferin', w:'aferim'},
-        {id:102, c:'aşçı', w:'ahçı'},           
-        {id:103, c:'şemsiye', w:'şemşiye'},     
-        {id:104, c:'kirpik', w:'kiprik'},      
-        {id:105, c:'kibrit', w:'kirbit'},      
-        {id:106, c:'ekşi', w:'eşki'},           
-        {id:107, c:'her şey', w:'herşey'},      
-        {id:108, c:'birçok', w:'bir çok'},     
-        {id:109, c:'hiçbir', w:'hiç bir'},     
-        {id:110, c:'sağ ol', w:'sağol'},       
-        {id:111, c:'hoşça kal', w:'hoşçakal'},  
-        {id:112, c:'maalesef', w:'malesef'},    
-        {id:113, c:'kılavuz', w:'klavuz'},      
-        {id:114, c:'hastane', w:'hastahane'},   
-        {id:115, c:'eczane', w:'eczahane'},     
-        {id:116, c:'postane', w:'postahane'},   
-        {id:117, c:'pastane', w:'pastahane'},  
-        {id:118, c:'kontör', w:'kontür'},       
-        {id:119, c:'alüminyum', w:'aliminyum'}, 
-        {id:120, c:'jelatin', w:'jeletin'}
-      ],
-      medium: [
-        {id:21,correct:'inisiyatif',wrong:'insiyatif'},{id:22,correct:'orijinal',wrong:'orjinal'},{id:23,correct:'entelektüel',wrong:'entellektüel'},{id:24,correct:'doküman',wrong:'döküman'},
-        {id:25,correct:'antrenman',wrong:'antreman'},{id:26,correct:'unvan',wrong:'ünvan'},{id:27,correct:'vejetaryen',wrong:'vejeteryan'},{id:28,correct:'restoran',wrong:'restorant'},
-        {id:29,correct:'şoför',wrong:'şöför'},{id:30,correct:'laboratuvar',wrong:'labaratuar'},{id:31,correct:'egzoz',wrong:'egsos'},{id:32,correct:'rönesans',wrong:'rönasans'},
-        {id:33,correct:'nispet',wrong:'nisbet'},{id:34,correct:'şefkat',wrong:'şevkat'},{id:35,correct:'sarimsak',wrong:'sarmısak'},{id:36,correct:'asfalt',wrong:'asvalt'},
-        {id:37,correct:'şofben',wrong:'şofpen'},{id:38,correct:'tetanos',wrong:'tetanoz'},{id:39,correct:'maydanoz',wrong:'maydonoz'},{id:40,correct:'tespih',wrong:'tesbih'},
-        {id:41,correct:'naif',wrong:'nahif'},{id:42,correct:'peştamal',wrong:'peştemal'},{id:43,correct:'provokatör',wrong:'provakatör'},{id:44,correct:'mevlit',wrong:'mevlüd'}
-      ],
-      hard: [
-        {id:45,correct:'karnabahar',wrong:'karnıbahar'},{id:46,correct:'gardırop',wrong:'gardrop'},{id:47,correct:'atardamar',wrong:'atar damar'},{id:48,correct:'ana dil',wrong:'anadil'},
-        {id:49,correct:'anayasa',wrong:'ana yasa'},{id:50,correct:'denizanası',wrong:'deniz anası'},{id:51,correct:'hoşgörü',wrong:'hoş görü'},{id:52,correct:'özbeöz',wrong:'öz be öz'},
-        {id:53,correct:'anbean',wrong:'an be an'},{id:54,correct:'günbegün',wrong:'gün be gün'},{id:55,correct:'sıra dışı',wrong:'sıradışı'},{id:56,correct:'yani sıra',wrong:'yanısıra'},
-        {id:57,correct:'müsvedde',wrong:'müsvette'},{id:58,correct:'kurdele',wrong:'kordele'},{id:59,correct:'kupür',wrong:'küpür'},{id:60,correct:'rastlantı',wrong:'raslantı'},
-        {id:61,correct:'iddia',wrong:'idda'},{id:62,correct:'acente',wrong:'acenta'},{id:63,correct:'zatürre',wrong:'zatüre'},{id:64,correct:'rögar',wrong:'logar'},
-        {id:65,correct:'tazyik',wrong:'tazzik'},{id:66,correct:'bilinçaltı',wrong:'bilinç altı'},{id:67,correct:'sağduyu',wrong:'sağ duyu'},{id:68,correct:'eş anlam',wrong:'eşanlam'},
-        {id:69,correct:'önsezi',wrong:'ön sezi'},{id:70,correct:'dil bilimi',wrong:'dilbilimi'},{id:71,correct:'söz konusu',wrong:'sözkonusu'},{id:72,correct:'gözyaşı',wrong:'göz yaşı'},
-        {id:73,correct:'birdenbire',wrong:'birden bire'},{id:74,correct:'örtbas',wrong:'ört bas'},{id:75,correct:'pürdikkat',wrong:'pür dikkat'},{id:76,correct:'hasbihâl',wrong:'hasbihal'},
-        {id:77,correct:'sandviç',wrong:'sandüviç'},{id:78,correct:'bisküvi',wrong:'püsküvi'},{id:79,correct:'dinozor',wrong:'dinazor'},{id:80,correct:'erozyon',wrong:'erazyon'},
-        {id:81,correct:'içgörü',wrong:'iç görü'},{id:82,correct:'öngörü',wrong:'ön görü'},{id:83,correct:'sağgörü',wrong:'sağ görü'},{id:84,correct:'önayak',wrong:'ön ayak'},
-        {id:85,correct:'ön söz',wrong:'önsöz'},{id:86,correct:'ön yargı',wrong:'önyargı'},{id:87,correct:'stajyer',wrong:'stajer'},{id:88,correct:'pardösü',wrong:'pardüsü'},
-        {id:89,correct:'kravat',wrong:'gravat'},{id:90,correct:'zarafet',wrong:'zerafet'},{id:91,correct:'komiser',wrong:'komser'},{id:92,correct:'konservatuvar',wrong:'konservatuar'},
-        {id:93,correct:'ortaöğretim',wrong:'orta öğretim'},{id:94,correct:'özdeyiş',wrong:'öz deyiş'},{id:95,correct:'öz eleştiri',wrong:'özeleştiri'},{id:96,correct:'öz geçmiş',wrong:'özgeçmiş'},
-        {id:97,correct:'öz güven',wrong:'özgüven'},{id:98,correct:'öz saygı',wrong:'özsaygı'},{id:99,correct:'özveri',wrong:'öz veri'},{id:100,correct:'öz yaşam',wrong:'özyaşam'},
-        {id:101,correct:'içgüdü',wrong:'iç güdü'},{id:102,correct:'içyüz',wrong:'iç yüz'},{id:103,correct:'sıradağ',wrong:'sıra dağ'},{id:104,correct:'büyükanne',wrong:'büyük anne'},
-        {id:105,correct:'büyükbaba',wrong:'büyük baba'},{id:106,correct:'büyükelçi',wrong:'büyük elçi'},{id:107,correct:'büyükşehir',wrong:'büyük şehir'},{id:108,correct:'silahşor',wrong:'silahşör'},
-        {id:109,correct:'kolektif',wrong:'kollektif'},{id:110,correct:'müspet',wrong:'müsbet'},{id:111,correct:'seyahat',wrong:'seyehat'},{id:112,correct:'adale',wrong:'adele'},
-        {id:114,correct:'tehdit',wrong:'tehtit'},{id:115,correct:'acayip',wrong:'acaip'},{id:116,correct:'altyapı',wrong:'alt yapı'},
-        {id:117,correct:'ayakaltı',wrong:'ayak altı'},{id:118,correct:'üstçavuş',wrong:'üst çavuş'},{id:119,correct:'üstsubay',wrong:'üst subay'},{id:120,correct:'binbir',wrong:'bin bir'},
-        {id:121,correct:'peşi sıra',wrong:'peşisıra'},{id:122,correct:'yarıçap',wrong:'yarı çap'},{id:123,correct:'katetmek',wrong:'kat etmek'},{id:124,correct:'cibilliyet',wrong:'cibiliyet'},
-        {id:125,correct:'el âlem',wrong:'elalem'},{id:126,correct:'defetmek',wrong:'def etmek'},{id:127,correct:'menetmek',wrong:'men etmek'},{id:128,correct:'on binlerce',wrong:'onbinlerce'},
-        {id:129,correct:'gözlemevi',wrong:'gözlem evi'},{id:130,correct:'darbetmek',wrong:'darp etmek'},{id:131,correct:'sugötürmez',wrong:'su götürmez'},{id:132,correct:'tez canlı',wrong:'tezcanlı'},
-        {id:133,correct:'maiyet',wrong:'mahiyet'},{id:134,correct:'değerbilmezlik',wrong:'değer bilmezlik'},{id:135,correct:'zabıt kâtibi',wrong:'zabıt katibi'},{id:136,correct:'Çoban Yıldızı',wrong:'Çobanyıldızı'}
-      ]
+      easy: [
+            {id:1, correct:'yalnız', wrong:'yanlız'}, {id:2, correct:'yanlış', wrong:'yalnış'}, {id:3, correct:'herkes', wrong:'herkez'},
+            {id:4, correct:'sürpriz', wrong:'süpriz'}, {id:5, correct:'tıraş', wrong:'traş'}, {id:6, correct:'makine', wrong:'makina'},
+            {id:7, correct:'meyve', wrong:'meyva'}, {id:8, correct:'grup', wrong:'gurup'}, {id:9, correct:'direkt', wrong:'direk'},
+            {id:10, correct:'poğaça', wrong:'pohaça'}, {id:11, correct:'elektrik', wrong:'elektirik'}, {id:12, correct:'fantezi', wrong:'fantazi'},
+            {id:13, correct:'fasulye', wrong:'fasülye'}, {id:14, correct:'kavanoz', wrong:'gavanoz'}, {id:15, correct:'materyal', wrong:'mataryel'},
+            {id:16, correct:'espri', wrong:'espiri'}, {id:17, correct:'idman', wrong:'itman'}, {id:18, correct:'eşofman', wrong:'eşortman'},
+            {id:19, correct:'etüt', wrong:'etüd'}, {id:20, correct:'lavabo', wrong:'lavobo'}, {id:21, correct:'aferin', wrong:'aferim'},
+            {id:22, correct:'aşçı', wrong:'ahçı'}, {id:23, correct:'şemsiye', wrong:'şemşiye'}, {id:24, correct:'kirpik', wrong:'kiprik'},
+            {id:25, correct:'kibrit', wrong:'kirbit'}, {id:26, correct:'ekşi', wrong:'eşki'}, {id:27, correct:'her şey', wrong:'herşey'},
+            {id:28, correct:'birçok', wrong:'bir çok'}, {id:29, correct:'hiçbir', wrong:'hiç bir'}, {id:30, correct:'sağ ol', wrong:'sağol'},
+            {id:31, correct:'hoşça kal', wrong:'hoşçakal'}, {id:32, correct:'maalesef', wrong:'malesef'}, {id:33, correct:'kılavuz', wrong:'klavuz'},
+            {id:34, correct:'hastane', wrong:'hastahane'}, {id:35, correct:'eczane', wrong:'eczahane'}, {id:36, correct:'postane', wrong:'postahane'},
+            {id:37, correct:'pastane', wrong:'pastahane'}, {id:38, correct:'kontör', wrong:'kontür'}, {id:39, correct:'alüminyum', wrong:'aliminyum'},
+            {id:40, correct:'jelatin', wrong:'jeletin'}, {id:41, correct:'bahçe', wrong:'bahce'}, {id:42, correct:'sandalye', wrong:'sandelye'},
+            {id:44, correct:'çorap', wrong:'çorap'}, {id:45, correct:'bakkal', wrong:'bakgal'}, {id:46, correct:'mutfak', wrong:'mutvak'},
+            {id:47, correct:'bilgisayar', wrong:'bilgisayan'}, {id:49, correct:'kulp', wrong:'gulp'}
+        ],
+        medium: [
+            {id:201, correct:'inisiyatif', wrong:'insiyatif'}, {id:202, correct:'orijinal', wrong:'orjinal'}, {id:203, correct:'entelektüel', wrong:'entellektüel'},
+            {id:204, correct:'doküman', wrong:'döküman'}, {id:205, correct:'antrenman', wrong:'antreman'}, {id:206, correct:'unvan', wrong:'ünvan'},
+            {id:207, correct:'vejetaryen', wrong:'vejeteryan'}, {id:208, correct:'restoran', wrong:'restorant'}, {id:209, correct:'şoför', wrong:'şöför'},
+            {id:210, correct:'laboratuvar', wrong:'labaratuar'}, {id:211, correct:'egzoz', wrong:'egsos'}, {id:212, correct:'rönesans', wrong:'rönasans'},
+            {id:213, correct:'nispet', wrong:'nisbet'}, {id:214, correct:'şefkat', wrong:'şevkat'}, {id:215, correct:'sarımsak', wrong:'sarmısak'},
+            {id:216, correct:'asfalt', wrong:'asvalt'}, {id:217, correct:'şofben', wrong:'şofpen'}, {id:218, correct:'tetanos', wrong:'tetanoz'},
+            {id:219, correct:'maydanoz', wrong:'maydonoz'}, {id:220, correct:'tespih', wrong:'tesbih'}, {id:221, correct:'naif', wrong:'nahif'},
+            {id:222, correct:'peştamal', wrong:'peştemal'}, {id:223, correct:'provokatör', wrong:'provakatör'}, {id:224, correct:'mevlit', wrong:'mevlüd'},
+            {id:225, correct:'dilbilim', wrong:'dil bilim'}, {id:226, correct:'fen bilimleri', wrong:'fenbilimleri'}, {id:227, correct:'birtakım', wrong:'bir takım'},
+            {id:228, correct:'birkaç', wrong:'bir kaç'}, {id:229, correct:'yapboz', wrong:'yap boz'}
+        ],
+        hard: [
+            {id:301, correct:'karnabahar', wrong:'karnıbahar'}, {id:302, correct:'gardırop', wrong:'gardrop'}, {id:303, correct:'atardamar', wrong:'atar damar'},
+            {id:304, correct:'ana dil', wrong:'anadil'}, {id:305, correct:'anayasa', wrong:'ana yasa'}, {id:306, correct:'denizanası', wrong:'deniz anası'},
+            {id:307, correct:'hoşgörü', wrong:'hoş görü'}, {id:308, correct:'özbeöz', wrong:'öz be öz'}, {id:309, correct:'anbean', wrong:'an be an'},
+            {id:310, correct:'günbegün', wrong:'gün be gün'}, {id:311, correct:'sıra dışı', wrong:'sıradışı'}, {id:312, correct:'yani sıra', wrong:'yanısıra'},
+            {id:313, correct:'müsvedde', wrong:'müsvette'}, {id:314, correct:'kurdele', wrong:'kordele'}, {id:315, correct:'kupür', wrong:'küpür'},
+            {id:316, correct:'rastlantı', wrong:'raslantı'}, {id:317, correct:'iddia', wrong:'idda'}, {id:318, correct:'acente', wrong:'acenta'},
+            {id:319, correct:'zatürre', wrong:'zatüre'}, {id:320, correct:'rögar', wrong:'logar'}, {id:321, correct:'tazyik', wrong:'tazzik'},
+            {id:322, correct:'bilinçaltı', wrong:'bilinç altı'}, {id:323, correct:'sağduyu', wrong:'sağ duyu'}, {id:324, correct:'eş anlam', wrong:'eşanlam'},
+            {id:325, correct:'önsezi', wrong:'ön sezi'}, {id:326, correct:'dil bilimi', wrong:'dilbilimi'}, {id:327, correct:'söz konusu', wrong:'sözkonusu'},
+            {id:328, correct:'gözyaşı', wrong:'göz yaşı'}, {id:329, correct:'birdenbire', wrong:'birden bire'}, {id:330, correct:'örtbas', wrong:'ört bas'},
+            {id:331, correct:'pürdikkat', wrong:'pür dikkat'}, {id:332, correct:'hasbihâl', wrong:'hasbihal'}, {id:333, correct:'sandviç', wrong:'sandüviç'},
+            {id:334, correct:'bisküvi', wrong:'püsküvi'}, {id:335, correct:'dinozor', wrong:'dinazor'}, {id:336, correct:'erozyon', wrong:'erazyon'},
+            {id:337, correct:'içgörü', wrong:'iç görü'}, {id:338, correct:'öngörü', wrong:'ön görü'}, {id:339, correct:'sağgörü', wrong:'sağ görü'},
+            {id:340, correct:'önayak', wrong:'ön ayak'}, {id:341, correct:'ön söz', wrong:'önsöz'}, {id:342, correct:'ön yargı', wrong:'önyargı'},
+            {id:343, correct:'stajyer', wrong:'stajer'}, {id:344, correct:'pardösü', wrong:'pardüsü'}, {id:345, correct:'kravat', wrong:'gravat'},
+            {id:346, correct:'zarafet', wrong:'zerafet'}, {id:347, correct:'komiser', wrong:'komser'}, {id:348, correct:'konservatuvar', wrong:'konservatuar'},
+            {id:349, correct:'ortaöğretim', wrong:'orta öğretim'}, {id:350, correct:'özdeyiş', wrong:'öz deyiş'}, {id:351, correct:'öz eleştiri', wrong:'özeleştiri'},
+            {id:352, correct:'öz geçmiş', wrong:'özgeçmiş'}, {id:353, correct:'öz güven', wrong:'özgüven'}, {id:354, correct:'öz saygı', wrong:'özsaygı'},
+            {id:355, correct:'özveri', wrong:'öz veri'}, {id:356, correct:'öz yaşam', wrong:'özyaşam'}, {id:357, correct:'içgüdü', wrong:'iç güdü'},
+            {id:358, correct:'içyüz', wrong:'iç yüz'}, {id:359, correct:'sıradağ', wrong:'sıra dağ'}, {id:360, correct:'büyükanne', wrong:'büyük anne'},
+            {id:361, correct:'büyükbaba', wrong:'büyük baba'}, {id:362, correct:'büyükelçi', wrong:'büyük elçi'}, {id:363, correct:'büyükşehir', wrong:'büyük şehir'},
+            {id:364, correct:'silahşor', wrong:'silahşör'}, {id:365, correct:'kolektif', wrong:'kollektif'}, {id:366, correct:'müspet', wrong:'müsbet'},
+            {id:367, correct:'seyahat', wrong:'seyehat'}, {id:368, correct:'adale', wrong:'adele'}, {id:369, correct:'tehdit', wrong:'tehtit'},
+            {id:370, correct:'acayip', wrong:'acaip'}, {id:371, correct:'altyapı', wrong:'alt yapı'}, {id:372, correct:'ayakaltı', wrong:'ayak altı'},
+            {id:373, correct:'üstçavuş', wrong:'üst çavuş'}, {id:374, correct:'üstsubay', wrong:'üst subay'}, {id:375, correct:'binbir', wrong:'bin bir'},
+            {id:376, correct:'peşi sıra', wrong:'peşisıra'}, {id:377, correct:'yarıçap', wrong:'yarı çap'}, {id:378, correct:'katetmek', wrong:'kat etmek'},
+            {id:379, correct:'cibilliyet', wrong:'cibiliyet'}, {id:380, correct:'el âlem', wrong:'elalem'}, {id:381, correct:'defetmek', wrong:'def etmek'},
+            {id:382, correct:'menetmek', wrong:'men etmek'}, {id:383, correct:'on binlerce', wrong:'onbinlerce'}, {id:384, correct:'gözlemevi', wrong:'gözlem evi'},
+            {id:385, correct:'darbetmek', wrong:'darp etmek'}, {id:386, correct:'sugötürmez', wrong:'su götürmez'}, {id:387, correct:'tez canlı', wrong:'tezcanlı'},
+            {id:388, correct:'maiyet', wrong:'mahiyet'}, {id:389, correct:'değerbilmezlik', wrong:'değer bilmezlik'}, {id:390, correct:'zabıt kâtibi', wrong:'zabıt katibi'},
+            {id:391, correct:'Çoban Yıldızı', wrong:'Çobanyıldızı'},
+            {id:392, correct:'fevkalade', wrong:'fevkaladé'}, {id:393, correct:'müteahhit', wrong:'müteahit'}, {id:394, correct:'ihtiras', wrong:'ihtirass'},
+            {id:395, correct:'muvaffak', wrong:'muvafak'}, {id:396, correct:'açgözlülük', wrong:'acgözlülük'}, {id:397, correct:'kaşif', wrong:'kâşif'},
+            {id:398, correct:'lüzumsuz', wrong:'lüzumsüz'}, {id:399, correct:'mahremiyet', wrong:'mahremiyett'}, {id:400, correct:'istikrarlı', wrong:'istikrarlıi'},
+            {id:401, correct:'hakikat', wrong:'hakikattt'}, {id:402, correct:'mukaddes', wrong:'mukades'}, {id:403, correct:'sükûnet', wrong:'sukûnet'},
+            {id:404, correct:'tevazu', wrong:'tevâzu'}, {id:405, correct:'veciz', wrong:'vecizz'}, {id:406, correct:'vicdan', wrong:'vicdann'},
+            {id:407, correct:'müessese', wrong:'müessse'}, {id:408, correct:'tezahür', wrong:'tezahürh'}, {id:409, correct:'nihai', wrong:'nihâi'},
+            {id:410, correct:'tedbir', wrong:'tedbirr'}, {id:411, correct:'kıymetli', wrong:'kıymedli'}
+        ]
+
       },
       shop: {
         themes: [
@@ -480,5 +492,6 @@
   </script>
 </body>
 </html>
+
 
 
